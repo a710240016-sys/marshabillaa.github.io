@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Modul: Budaya dan Etika Digital</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e8a020;
+    --accent2: #3d9fbd;
+    --light: #f0f6fb;
+    --white: #ffffff;
+    --text: #1e2d3d;
+    --muted: #6b8099;
+    --success: #2e9e6b;
+    --danger: #d94f4f;
+    --border: #ccdde8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #e8f1f8;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* SIDEBAR NAV */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 240px; height: 100vh;
+    background: var(--primary);
+    display: flex; flex-direction: column;
+    padding: 28px 0;
+    z-index: 100;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.12);
+  }
+
+  .sidebar-logo {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-logo .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-logo h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-item:hover { color: #fff; background: rgba(255,255,255,0.07); }
+  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(232,160,32,0.08); }
+
+  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+  .progress-wrap {
+    margin-top: auto;
+    padding: 20px 24px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .progress-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .progress-bar { background: rgba(255,255,255,0.15); border-radius: 99px; height: 6px; }
+  .progress-fill { height: 6px; border-radius: 99px; background: var(--accent); transition: width 0.5s ease; }
+  .progress-pct { font-size: 12px; color: var(--accent); font-weight: 700; margin-top: 6px; }
+
+  /* MAIN CONTENT */
+  .main {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 40px 48px;
+  }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%);
+    border-radius: 20px;
+    padding: 52px 48px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .hero::before {
+    content: '⚡';
+    position: absolute;
+    right: 48px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px;
+    opacity: 0.06;
+  }
+
+  .hero .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 99px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* TUJUAN CARDS */
+  .tujuan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .tujuan-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .tujuan-num {
+    width: 32px; height: 32px;
+    background: var(--light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+
+  .tujuan-card p { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+
+  .section-header h2 {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card p { font-size: 14px; color: var(--text); line-height: 1.7; }
+
+  .highlight-box {
+    background: var(--light);
+    border-left: 4px solid var(--accent2);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--primary);
+    font-style: italic;
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .example-item {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .example-item.bad { border-left: 3px solid var(--danger); }
+  .example-item.good { border-left: 3px solid var(--success); }
+
+  .example-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .example-item.bad .example-label { color: var(--danger); }
+  .example-item.good .example-label { color: var(--success); }
+
+  .visual-infografis {
+    background: linear-gradient(135deg, #f0f6fb, #e0eef8);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    text-align: center;
+  }
+
+  .infografis-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .infografis-emoji { font-size: 28px; margin-bottom: 8px; }
+  .infografis-label { font-size: 12px; font-weight: 700; color: var(--primary); }
+  .infografis-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* FLASHCARD */
+  .flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .flashcard-wrap {
+    width: 100%;
+    max-width: 520px;
+    height: 240px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .flashcard-inner {
+    width: 100%; height: 100%;
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  .flashcard-wrap.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-face {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 18px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .card-front {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .card-back {
+    background: var(--white);
+    border: 2px solid var(--accent2);
+    transform: rotateY(180deg);
+  }
+
+  .card-front .card-hint { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 12px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .card-front .card-term { font-size: 22px; font-weight: 700; }
+  .card-back .card-def { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .card-back .card-accent { font-size: 11px; font-weight: 700; color: var(--accent2); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+
+  .flashcard-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .fc-btn {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .fc-btn:hover { background: var(--light); border-color: var(--accent2); }
+
+  .fc-counter {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .fc-hint { font-size: 12px; color: var(--muted); text-align: center; }
+
+  /* QUIZ */
+  .quiz-question {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .q-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .q-options { display: flex; flex-direction: column; gap: 10px; }
+
+  .q-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+  }
+
+  .q-option:hover { border-color: var(--accent2); background: var(--light); }
+  .q-option.selected { border-color: var(--accent2); background: #e8f5fa; }
+  .q-option.correct { border-color: var(--success); background: #edfaf3; color: var(--success); font-weight: 600; }
+  .q-option.wrong { border-color: var(--danger); background: #fdf0f0; color: var(--danger); }
+
+  .q-option-letter {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: var(--light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .q-option.correct .q-option-letter { background: var(--success); color: #fff; }
+  .q-option.wrong .q-option-letter { background: var(--danger); color: #fff; }
+
+  .q-feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .q-feedback.show { display: block; }
+  .q-feedback.correct { background: #edfaf3; color: var(--success); border: 1px solid #b8ecd5; }
+  .q-feedback.wrong { background: #fdf0f0; color: var(--danger); border: 1px solid #f5c6c6; }
+
+  /* EVALUASI */
+  .eval-score {
+    background: linear-gradient(135deg, var(--primary), #2a6090);
+    border-radius: 18px;
+    padding: 36px;
+    text-align: center;
+    color: #fff;
+    display: none;
+    margin-top: 24px;
+  }
+
+  .eval-score.show { display: block; }
+  .eval-score-num { font-size: 56px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .eval-score-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: #0f2a45; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,58,92,0.25); }
+
+  .btn-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-accent:hover { background: #c98a10; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: var(--primary); background: var(--light); }
+
+  .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
+  /* REFERENSI */
+  .ref-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .ref-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .ref-num {
+    width: 28px; height: 28px;
+    background: var(--light);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .ref-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .ref-text strong { color: var(--primary); font-weight: 700; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px 20px; }
+    .tujuan-grid { grid-template-columns: 1fr; }
+    .visual-infografis { grid-template-columns: repeat(2, 1fr); }
+    .example-grid { grid-template-columns: 1fr; }
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  .tag-pill {
+    display: inline-block;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="tag">E-Modul · UMS</div>
+    <h2>Budaya & Etika Digital</h2>
+  </div>
+
+  <a class="nav-item active" onclick="showSection('halaman-pembuka', this)">
+    <span class="nav-icon">🏠</span> Halaman Pembuka
+  </a>
+  <a class="nav-item" onclick="showSection('materi', this)">
+    <span class="nav-icon">📖</span> Materi Pembelajaran
+  </a>
+  <a class="nav-item" onclick="showSection('flashcard', this)">
+    <span class="nav-icon">🃏</span> Flashcard
+  </a>
+  <a class="nav-item" onclick="showSection('kuis', this)">
+    <span class="nav-icon">🧠</span> Kuis Refleksi
+  </a>
+  <a class="nav-item" onclick="showSection('evaluasi', this)">
+    <span class="nav-icon">📝</span> Evaluasi
+  </a>
+  <a class="nav-item" onclick="showSection('referensi', this)">
+    <span class="nav-icon">📚</span> Referensi
+  </a>
+
+  <div class="progress-wrap">
+    <div class="progress-label">Progress Belajar</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 16%"></div></div>
+    <div class="progress-pct" id="progressPct">1 / 6 bagian</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- 1. HALAMAN PEMBUKA -->
+  <div id="halaman-pembuka" class="section active">
+    <div class="hero">
+      <div class="eyebrow">Mata Kuliah Literasi Dasar · UMS</div>
+      <h1>Budaya dan Etika Digital</h1>
+      <p>Memahami norma, nilai, dan perilaku yang baik dalam ekosistem digital — agar kita menjadi warga digital yang bertanggung jawab, bijak, dan beretika.</p>
+      <div class="hero-meta">
+        <div class="meta-chip">📘 E-Modul Interaktif</div>
+        <div class="meta-chip">⏱ ±45 menit</div>
+        <div class="meta-chip">🎯 Tingkat Dasar</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📋 Deskripsi Singkat</h3>
+      <p>Modul ini membahas bagaimana teknologi membentuk budaya baru dalam interaksi manusia, serta etika yang perlu dijaga saat beraktivitas di ruang digital. Kamu akan mempelajari konsep netiquette, jejak digital, hak dan kewajiban pengguna, serta dampak sosial dari perilaku digital.</p>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Tujuan Pembelajaran</h3>
+      <p>Setelah menyelesaikan modul ini, mahasiswa diharapkan mampu:</p>
+      <div class="tujuan-grid">
+        <div class="tujuan-card">
+          <div class="tujuan-num">1</div>
+          <p>Menjelaskan konsep budaya digital dan netiquette dalam kehidupan sehari-hari</p>
+        </div>
+        <div class="tujuan-card">
+          <div class="tujuan-num">2</div>
+          <p>Mengidentifikasi bentuk pelanggaran etika digital dan dampaknya terhadap masyarakat</p>
+        </div>
+        <div class="tujuan-card">
+          <div class="tujuan-num">3</div>
+          <p>Menerapkan prinsip etika digital dalam aktivitas online sehari-hari secara bertanggung jawab</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="showSection('materi', document.querySelectorAll('.nav-item')[1])">Mulai Belajar →</button>
+    </div>
+  </div>
+
+  <!-- 2. MATERI -->
+  <div id="materi" class="section">
+    <div class="section-header">
+      <div class="section-icon">📖</div>
+      <h2>Materi Pembelajaran</h2>
+    </div>
+
+    <div class="card">
+      <h3>🌐 Apa itu Budaya Digital?</h3>
+      <p>Budaya digital adalah sekumpulan nilai, norma, kebiasaan, dan cara berperilaku yang muncul akibat penggunaan teknologi digital dalam kehidupan manusia. Berbeda dari budaya tradisional yang terbentuk selama ratusan tahun, budaya digital berkembang sangat cepat mengikuti perkembangan teknologi.</p>
+      <div class="highlight-box">
+        "Budaya digital bukan hanya tentang cara kita menggunakan teknologi, tapi tentang bagaimana teknologi membentuk cara kita berpikir, berkomunikasi, dan berinteraksi." — David Gauntlett
+      </div>
+      <p>Contoh nyata budaya digital: kebiasaan <em>scrolling</em> media sosial, berbagi foto makanan, meme sebagai bahasa ekspresi, hingga cancel culture dan public shaming online.</p>
+    </div>
+
+    <div class="card">
+      <h3>💬 Etika Digital & Netiquette</h3>
+      <p>Etika digital adalah seperangkat prinsip dan norma yang mengatur perilaku manusia dalam lingkungan digital. Salah satu wujudnya adalah <strong>netiquette</strong> (network etiquette) — tata krama dalam berkomunikasi di internet.</p>
+
+      <div class="example-grid">
+        <div class="example-item bad">
+          <div class="example-label">❌ Pelanggaran Etika</div>
+          Menyebarkan hoaks tanpa verifikasi, cyberbullying, plagiarisme konten, menggunakan foto orang lain tanpa izin
+        </div>
+        <div class="example-item good">
+          <div class="example-label">✅ Etika Digital Baik</div>
+          Verifikasi info sebelum share, memberi kredit pada pemilik konten, menjaga privasi orang lain, berkomentar dengan sopan
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>👣 Jejak Digital (Digital Footprint)</h3>
+      <p>Setiap aktivitas online meninggalkan jejak digital — data yang tersimpan tentang kamu di internet. Jejak ini bisa bersifat aktif (konten yang kamu posting) maupun pasif (data yang dikumpulkan situs web tanpa kamu sadari).</p>
+      <div class="highlight-box">
+        Sebelum memposting, tanyakan pada diri sendiri: <em>"Apakah saya nyaman jika orang tua, dosen, atau calon perusahaan melihat ini 10 tahun mendatang?"</em>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🖼 Visual: Pilar Etika Digital</h3>
+      <div class="visual-infografis">
+        <div class="infografis-item">
+          <div class="infografis-emoji">🧭</div>
+          <div class="infografis-label">Tanggung Jawab</div>
+          <div class="infografis-sub">Bertanggung jawab atas setiap konten yang dibuat & disebarkan</div>
+        </div>
+        <div class="infografis-item">
+          <div class="infografis-emoji">🔒</div>
+          <div class="infografis-label">Privasi</div>
+          <div class="infografis-sub">Menghormati privasi diri sendiri dan orang lain</div>
+        </div>
+        <div class="infografis-item">
+          <div class="infografis-emoji">⚖️</div>
+          <div class="infografis-label">Kejujuran</div>
+          <div class="infografis-sub">Tidak menyebarkan informasi palsu atau menyesatkan</div>
+        </div>
+        <div class="infografis-item">
+          <div class="infografis-emoji">🤝</div>
+          <div class="infografis-label">Empati</div>
+          <div class="infografis-sub">Mempertimbangkan dampak kata-kata digital pada orang lain</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>⚖️ Hak dan Kewajiban Warga Digital</h3>
+      <p>Sebagai warga digital, kita memiliki hak sekaligus kewajiban:</p>
+      <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div style="background: #e8f5fa; border-radius: 10px; padding: 14px;">
+          <div style="font-weight: 700; color: var(--accent2); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">🔹 Hak</div>
+          <ul style="font-size: 13px; padding-left: 16px; line-height: 1.8;">
+            <li>Akses informasi secara bebas</li>
+            <li>Privasi dan keamanan data</li>
+            <li>Kebebasan berekspresi</li>
+            <li>Perlindungan dari kejahatan siber</li>
+          </ul>
+        </div>
+        <div style="background: #edfaf3; border-radius: 10px; padding: 14px;">
+          <div style="font-weight: 700; color: var(--success); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">🔹 Kewajiban</div>
+          <ul style="font-size: 13px; padding-left: 16px; line-height: 1.8;">
+            <li>Menghormati karya orang lain (HKI)</li>
+            <li>Tidak menyebarkan hoaks</li>
+            <li>Menjaga keamanan akun sendiri</li>
+            <li>Melaporkan konten berbahaya</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📌 Contoh Kasus: Cyberbullying di Kampus</h3>
+      <p>Seorang mahasiswa mem-posting foto teman sekelasnya tanpa izin disertai komentar negatif di grup WhatsApp angkatan. Foto tersebut menyebar luas dan membuat korban trauma secara psikologis.</p>
+      <div class="example-grid" style="margin-top: 12px;">
+        <div class="example-item bad">
+          <div class="example-label">❌ Pelanggaran</div>
+          Menyebarkan konten tanpa izin, cyberbullying, melanggar privasi — dapat dijerat UU ITE Pasal 27 dan 28
+        </div>
+        <div class="example-item good">
+          <div class="example-label">✅ Solusi</div>
+          Minta izin sebelum posting foto orang lain, laporkan ke admin grup, dukung korban dengan konseling
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="showSection('flashcard', document.querySelectorAll('.nav-item')[2])">Lanjut: Flashcard →</button>
+    </div>
+  </div>
+
+  <!-- 3. FLASHCARD -->
+  <div id="flashcard" class="section">
+    <div class="section-header">
+      <div class="section-icon">🃏</div>
+      <h2>Aktivitas: Flashcard Istilah Kunci</h2>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px;">
+      <p style="font-size: 14px; color: var(--muted);">Klik kartu untuk melihat definisi. Gunakan tombol navigasi untuk berpindah antar kartu.</p>
+    </div>
+
+    <div class="flashcard-container">
+      <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-inner" id="flashcardInner">
+          <div class="card-face card-front">
+            <div class="card-hint">Klik untuk lihat definisi</div>
+            <div class="card-term" id="fcTerm">Netiquette</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="card-accent">Definisi</div>
+            <div class="card-def" id="fcDef">Sekumpulan norma dan tata krama dalam berkomunikasi di internet, seperti tidak menggunakan huruf kapital semua (dianggap berteriak), memperkenalkan diri, dan tidak menyebarkan informasi tanpa verifikasi.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-hint">Klik kartu untuk membalik</div>
+
+      <div class="flashcard-nav">
+        <button class="fc-btn" onclick="prevCard()">← Sebelumnya</button>
+        <div class="fc-counter" id="fcCounter">1 / 6</div>
+        <button class="fc-btn" onclick="nextCard()">Selanjutnya →</button>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top: 32px;">
+      <button class="btn btn-primary" onclick="showSection('kuis', document.querySelectorAll('.nav-item')[3])">Lanjut: Kuis Refleksi →</button>
+    </div>
+  </div>
+
+  <!-- 4. KUIS REFLEKSI -->
+  <div id="kuis" class="section">
+    <div class="section-header">
+      <div class="section-icon">🧠</div>
+      <h2>Aktivitas: Kuis Refleksi</h2>
+    </div>
+
+    <div class="card" style="margin-bottom: 24px; background: #f0f6fb;">
+      <p style="font-size: 14px; color: var(--muted);">Jawab pertanyaan berikut berdasarkan pemahamanmu. Kuis ini tidak dinilai — digunakan untuk merefleksikan pemahaman materi.</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-question">
+      <div class="q-num">Pertanyaan 1</div>
+      <div class="q-text">Saat kamu menerima berita mengejutkan dari grup WhatsApp, tindakan yang paling etis adalah...</div>
+      <div class="q-options" id="kq1">
+        <div class="q-option" onclick="answerKuis('kq1', this, false, 'A')"><div class="q-option-letter">A</div>Langsung forward ke semua kontak agar info cepat menyebar</div>
+        <div class="q-option" onclick="answerKuis('kq1', this, false, 'B')"><div class="q-option-letter">B</div>Menyimpan info untuk diri sendiri saja</div>
+        <div class="q-option" onclick="answerKuis('kq1', this, true, 'C')"><div class="q-option-letter">C</div>Memverifikasi kebenaran berita terlebih dahulu sebelum menyebarkan</div>
+        <div class="q-option" onclick="answerKuis('kq1', this, false, 'D')"><div class="q-option-letter">D</div>Merespons dengan emoji saja agar tidak terlibat</div>
+      </div>
+      <div class="q-feedback" id="kfb1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-question">
+      <div class="q-num">Pertanyaan 2</div>
+      <div class="q-text">Menulis komentar menggunakan HURUF KAPITAL SEMUA di internet umumnya dianggap sebagai...</div>
+      <div class="q-options" id="kq2">
+        <div class="q-option" onclick="answerKuis('kq2', this, false, 'A')"><div class="q-option-letter">A</div>Tanda semangat dan antusias</div>
+        <div class="q-option" onclick="answerKuis('kq2', this, true, 'B')"><div class="q-option-letter">B</div>Bentuk berteriak atau ekspresi marah yang tidak sopan</div>
+        <div class="q-option" onclick="answerKuis('kq2', this, false, 'C')"><div class="q-option-letter">C</div>Cara agar pesan lebih mudah dibaca</div>
+        <div class="q-option" onclick="answerKuis('kq2', this, false, 'D')"><div class="q-option-letter">D</div>Tanda bahwa pengirim adalah orang penting</div>
+      </div>
+      <div class="q-feedback" id="kfb2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-question">
+      <div class="q-num">Pertanyaan 3</div>
+      <div class="q-text">Jejak digital pasif adalah...</div>
+      <div class="q-options" id="kq3">
+        <div class="q-option" onclick="answerKuis('kq3', this, false, 'A')"><div class="q-option-letter">A</div>Postingan foto dan video yang kamu unggah sendiri</div>
+        <div class="q-option" onclick="answerKuis('kq3', this, false, 'B')"><div class="q-option-letter">B</div>Komentar yang kamu tinggalkan di media sosial</div>
+        <div class="q-option" onclick="answerKuis('kq3', this, true, 'C')"><div class="q-option-letter">C</div>Data yang dikumpulkan situs web tentang aktivitasmu tanpa kamu sadari</div>
+        <div class="q-option" onclick="answerKuis('kq3', this, false, 'D')"><div class="q-option-letter">D</div>Pesan langsung yang kamu kirim ke teman</div>
+      </div>
+      <div class="q-feedback" id="kfb3"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="showSection('evaluasi', document.querySelectorAll('.nav-item')[4])">Lanjut: Evaluasi →</button>
+    </div>
+  </div>
+
+  <!-- 5. EVALUASI -->
+  <div id="evaluasi" class="section">
+    <div class="section-header">
+      <div class="section-icon">📝</div>
+      <h2>Evaluasi Akhir</h2>
+    </div>
+
+    <div class="card" style="background: #f0f6fb; margin-bottom: 24px;">
+      <p style="font-size: 14px; color: var(--muted);">Jawab 5 soal berikut. Pilih satu jawaban yang paling tepat untuk setiap pertanyaan, lalu klik <strong>Lihat Nilai</strong>.</p>
+    </div>
+
+    <!-- SOAL 1 -->
+    <div class="quiz-question">
+      <div class="q-num">Soal 1 dari 5</div>
+      <div class="q-text">Berikut ini yang BUKAN merupakan contoh pelanggaran etika digital adalah...</div>
+      <div class="q-options">
+        <div class="q-option eval-opt" data-q="1" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">A</div>Menyebarkan hoaks di media sosial</div>
+        <div class="q-option eval-opt" data-q="1" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">B</div>Melakukan doxxing (menyebarkan data pribadi orang)</div>
+        <div class="q-option eval-opt" data-q="1" data-correct="true" onclick="selectEval(this)"><div class="q-option-letter">C</div>Mencantumkan sumber saat berbagi artikel</div>
+        <div class="q-option eval-opt" data-q="1" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">D</div>Menggunakan foto orang lain tanpa izin untuk keperluan komersial</div>
+      </div>
+    </div>
+
+    <!-- SOAL 2 -->
+    <div class="quiz-question">
+      <div class="q-num">Soal 2 dari 5</div>
+      <div class="q-text">UU ITE di Indonesia mengatur tentang...</div>
+      <div class="q-options">
+        <div class="q-option eval-opt" data-q="2" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">A</div>Cara menggunakan internet yang efisien</div>
+        <div class="q-option eval-opt" data-q="2" data-correct="true" onclick="selectEval(this)"><div class="q-option-letter">B</div>Informasi dan transaksi elektronik termasuk larangan konten ilegal</div>
+        <div class="q-option eval-opt" data-q="2" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">C</div>Standar kecepatan internet minimal di Indonesia</div>
+        <div class="q-option eval-opt" data-q="2" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">D</div>Pembatasan penggunaan media sosial untuk remaja</div>
+      </div>
+    </div>
+
+    <!-- SOAL 3 -->
+    <div class="quiz-question">
+      <div class="q-num">Soal 3 dari 5</div>
+      <div class="q-text">Tindakan menyebarkan konten yang merendahkan seseorang secara berulang melalui media digital disebut...</div>
+      <div class="q-options">
+        <div class="q-option eval-opt" data-q="3" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">A</div>Phishing</div>
+        <div class="q-option eval-opt" data-q="3" data-correct="true" onclick="selectEval(this)"><div class="q-option-letter">B</div>Cyberbullying</div>
+        <div class="q-option eval-opt" data-q="3" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">C</div>Spamming</div>
+        <div class="q-option eval-opt" data-q="3" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">D</div>Trolling</div>
+      </div>
+    </div>
+
+    <!-- SOAL 4 -->
+    <div class="quiz-question">
+      <div class="q-num">Soal 4 dari 5</div>
+      <div class="q-text">Prinsip "empati digital" berarti...</div>
+      <div class="q-options">
+        <div class="q-option eval-opt" data-q="4" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">A</div>Hanya menggunakan internet untuk kegiatan yang menghasilkan uang</div>
+        <div class="q-option eval-opt" data-q="4" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">B</div>Menghindari semua interaksi digital</div>
+        <div class="q-option eval-opt" data-q="4" data-correct="true" onclick="selectEval(this)"><div class="q-option-letter">C</div>Mempertimbangkan dampak emosional konten digital terhadap orang lain sebelum menyebarkannya</div>
+        <div class="q-option eval-opt" data-q="4" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">D</div>Selalu menyetujui pendapat orang lain di media sosial</div>
+      </div>
+    </div>
+
+    <!-- SOAL 5 -->
+    <div class="quiz-question">
+      <div class="q-num">Soal 5 dari 5</div>
+      <div class="q-text">Cara terbaik untuk menjaga jejak digital yang positif adalah...</div>
+      <div class="q-options">
+        <div class="q-option eval-opt" data-q="5" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">A</div>Tidak pernah menggunakan internet sama sekali</div>
+        <div class="q-option eval-opt" data-q="5" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">B</div>Menggunakan nama palsu di semua platform</div>
+        <div class="q-option eval-opt" data-q="5" data-correct="true" onclick="selectEval(this)"><div class="q-option-letter">C</div>Berpikir sebelum memposting, verifikasi informasi, dan menghormati privasi orang lain</div>
+        <div class="q-option eval-opt" data-q="5" data-correct="false" onclick="selectEval(this)"><div class="q-option-letter">D</div>Membagikan semua informasi secara transparan tanpa filter</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitEval()">Lihat Nilai 📊</button>
+      <button class="btn btn-outline" onclick="resetEval()">Reset</button>
+    </div>
+
+    <div class="eval-score" id="evalScore">
+      <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;">Hasil Evaluasi</div>
+      <div class="eval-score-num" id="evalScoreNum">0</div>
+      <div class="eval-score-label" id="evalScoreLabel">dari 100</div>
+      <div style="margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.75);" id="evalMsg"></div>
+    </div>
+
+    <div class="btn-row" style="margin-top: 16px;">
+      <button class="btn btn-outline" onclick="showSection('referensi', document.querySelectorAll('.nav-item')[5])">Lanjut: Referensi →</button>
+    </div>
+  </div>
+
+  <!-- 6. REFERENSI -->
+  <div id="referensi" class="section">
+    <div class="section-header">
+      <div class="section-icon">📚</div>
+      <h2>Referensi</h2>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <p style="font-size: 14px; color: var(--muted);">Sumber materi yang digunakan dalam modul ini:</p>
+    </div>
+
+    <div class="ref-list">
+      <div class="ref-item">
+        <div class="ref-num">1</div>
+        <div class="ref-text"><strong>Kominfo RI.</strong> (2021). <em>Literasi Digital: Budaya Bermedia Digital yang Baik.</em> Kementerian Komunikasi dan Informatika Republik Indonesia. jakarta.go.id/kominfo</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-num">2</div>
+        <div class="ref-text"><strong>Ribble, M.</strong> (2015). <em>Digital Citizenship in Schools: Nine Elements All Students Should Know.</em> International Society for Technology in Education (ISTE).</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-num">3</div>
+        <div class="ref-text"><strong>Undang-Undang No. 19 Tahun 2016</strong> tentang Perubahan atas Undang-Undang No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik (UU ITE). Pemerintah Republik Indonesia.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-num">4</div>
+        <div class="ref-text"><strong>Shea, V.</strong> (1994). <em>Netiquette.</em> Albion Books. [Daring] Tersedia di: www.albion.com/netiquette/book/</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-num">5</div>
+        <div class="ref-text"><strong>Warschauer, M.</strong> (2003). <em>Technology and Social Inclusion: Rethinking the Digital Divide.</em> MIT Press, Cambridge.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 24px; background: linear-gradient(135deg, #f0f6fb, #e0eef8);">
+      <h3>🎉 Selamat! Kamu telah menyelesaikan modul ini.</h3>
+      <p style="margin-top: 8px; font-size: 14px; color: var(--muted);">Kamu telah mempelajari konsep budaya digital, etika, netiquette, jejak digital, serta hak dan kewajiban warga digital. Terapkan nilai-nilai ini dalam kehidupan digitalmu sehari-hari!</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // SECTION NAVIGATION
+  const sections = ['halaman-pembuka','materi','flashcard','kuis','evaluasi','referensi'];
+
+  function showSection(id, navEl) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if (navEl) navEl.classList.add('active');
+
+    const idx = sections.indexOf(id) + 1;
+    document.getElementById('progressFill').style.width = (idx / sections.length * 100) + '%';
+    document.getElementById('progressPct').textContent = idx + ' / ' + sections.length + ' bagian';
+    window.scrollTo(0,0);
+  }
+
+  // FLASHCARD
+  const cards = [
+    { term: 'Netiquette', def: 'Sekumpulan norma dan tata krama dalam berkomunikasi di internet, seperti tidak menggunakan huruf kapital semua, memperkenalkan diri, dan tidak menyebarkan informasi tanpa verifikasi.' },
+    { term: 'Jejak Digital', def: 'Kumpulan data yang ditinggalkan oleh pengguna saat beraktivitas di dunia maya, baik secara aktif (postingan, komentar) maupun pasif (data yang dikumpulkan situs tanpa disadari).' },
+    { term: 'Cyberbullying', def: 'Bentuk perundungan yang dilakukan melalui media digital, seperti mengirimkan pesan menghina, menyebarkan konten memalukan, atau mengucilkan seseorang secara online secara berulang.' },
+    { term: 'Doxxing', def: 'Tindakan mengungkap dan menyebarkan informasi pribadi seseorang (nama, alamat, nomor telepon, dll.) ke publik tanpa izin, yang dapat membahayakan keselamatan orang tersebut.' },
+    { term: 'Digital Citizenship', def: 'Konsep tentang penggunaan teknologi informasi yang bertanggung jawab, etis, aman, dan positif. Mencakup hak, kewajiban, dan norma dalam berinteraksi di dunia digital.' },
+    { term: 'Filter Bubble', def: 'Fenomena di mana algoritma media sosial hanya menampilkan konten yang sesuai preferensi pengguna, menciptakan "gelembung" informasi yang dapat mempersempit perspektif dan memperkuat bias.' },
+  ];
+
+  let currentCard = 0;
+  let isFlipped = false;
+
+  function updateCard() {
+    document.getElementById('fcTerm').textContent = cards[currentCard].term;
+    document.getElementById('fcDef').textContent = cards[currentCard].def;
+    document.getElementById('fcCounter').textContent = (currentCard + 1) + ' / ' + cards.length;
+    const wrap = document.querySelector('.flashcard-wrap');
+    wrap.classList.remove('flipped');
+    isFlipped = false;
+  }
+
+  function flipCard() {
+    const wrap = document.querySelector('.flashcard-wrap');
+    wrap.classList.toggle('flipped');
+    isFlipped = !isFlipped;
+  }
+
+  function nextCard() {
+    currentCard = (currentCard + 1) % cards.length;
+    updateCard();
+  }
+
+  function prevCard() {
+    currentCard = (currentCard - 1 + cards.length) % cards.length;
+    updateCard();
+  }
+
+  // KUIS REFLEKSI
+  function answerKuis(qId, el, isCorrect, letter) {
+    const container = document.getElementById(qId);
+    if (container.querySelector('.correct') || container.querySelector('.wrong')) return;
+    container.querySelectorAll('.q-option').forEach(o => o.style.pointerEvents = 'none');
+    el.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) container.querySelectorAll('.q-option').forEach(o => { if (o.dataset && o.dataset.correct === 'true') {} });
+
+    const fbId = 'kfb' + qId.replace('kq','');
+    const fb = document.getElementById(fbId);
+    if (fb) {
+      fb.className = 'q-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+      fb.textContent = isCorrect ? '✅ Benar! ' + getKuisExplanation(qId) : '❌ Kurang tepat. ' + getKuisExplanation(qId);
+    }
+  }
+
+  function getKuisExplanation(qId) {
+    const explanations = {
+      'kq1': 'Selalu verifikasi berita sebelum menyebarkan untuk mencegah penyebaran hoaks.',
+      'kq2': 'Menulis dengan HURUF KAPITAL SEMUA di internet dianggap sebagai berteriak dan tidak sopan.',
+      'kq3': 'Jejak digital pasif terbentuk dari data yang dikumpulkan situs web seperti cookies, riwayat browsing, dll.'
+    };
+    return explanations[qId] || '';
+  }
+
+  // EVALUASI
+  const evalAnswers = {};
+
+  function selectEval(el) {
+    const q = el.dataset.q;
+    document.querySelectorAll('.eval-opt[data-q="' + q + '"]').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    evalAnswers[q] = el.dataset.correct === 'true';
+  }
+
+  function submitEval() {
+    const total = 5;
+    let answered = Object.keys(evalAnswers).length;
+    if (answered < total) {
+      alert('Jawab semua ' + total + ' soal terlebih dahulu! (' + answered + '/' + total + ' terjawab)');
+      return;
+    }
+
+    let correct = 0;
+    for (let q in evalAnswers) { if (evalAnswers[q]) correct++; }
+
+    // Show correct/wrong
+    for (let q = 1; q <= total; q++) {
+      document.querySelectorAll('.eval-opt[data-q="' + q + '"]').forEach(o => {
+        o.style.pointerEvents = 'none';
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o.classList.contains('selected') && o.dataset.correct !== 'true') o.classList.add('wrong');
+      });
+    }
+
+    const score = Math.round(correct / total * 100);
+    const scoreEl = document.getElementById('evalScore');
+    scoreEl.classList.add('show');
+    document.getElementById('evalScoreNum').textContent = score;
+    document.getElementById('evalScoreLabel').textContent = 'dari 100 — ' + correct + ' soal benar';
+
+    let msg = '';
+    if (score >= 80) msg = '🎉 Sangat baik! Kamu sudah memahami etika digital dengan baik.';
+    else if (score >= 60) msg = '👍 Cukup baik! Ulangi materi untuk memperkuat pemahamanmu.';
+    else msg = '📖 Pelajari kembali materi modul ini, terutama bagian Etika Digital dan Netiquette.';
+    document.getElementById('evalMsg').textContent = msg;
+
+    scoreEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetEval() {
+    for (let k in evalAnswers) delete evalAnswers[k];
+    document.querySelectorAll('.eval-opt').forEach(o => {
+      o.classList.remove('selected', 'correct', 'wrong');
+      o.style.pointerEvents = '';
+    });
+    document.getElementById('evalScore').classList.remove('show');
+  }
+</script>
+</body>
+</html>
